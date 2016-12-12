@@ -11,6 +11,7 @@ import com.yztc.retrofitdemo.apiservice.LitchiapiService;
 import com.yztc.retrofitdemo.contants.UrlConstants;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -95,13 +96,59 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				});
 				break;
 			case R.id.chacanlist:
-
+				call= litchiapiService.getLitchCall(1,10,1);
+				call.enqueue(new Callback<ResponseBody>() {
+					@Override
+					public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+						try {
+							Log.e("Tag",response.body().string());
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					@Override
+					public void onFailure(Call<ResponseBody> call, Throwable t) {
+						Log.e("Tag",t.getMessage());
+					}
+				});
 				break;
 			case R.id.chacan:
-
+					HashMap<String,Integer> hamap=new HashMap<>();
+					hamap.put("column",0);
+					hamap.put("PageSize",10);
+					hamap.put("pageIndex",1);
+				call= litchiapiService.getLitchCall(hamap);
+				call.enqueue(new Callback<ResponseBody>() {
+					@Override
+					public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+						try {
+							Log.e("Tag",response.body().string());
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					@Override
+					public void onFailure(Call<ResponseBody> call, Throwable t) {
+						Log.e("Tag",t.getMessage());
+					}
+				});
 				break;
 			case R.id.dongtaitotal:
-
+				call= litchiapiService.getLitchCall("GetFeeds",1,10,1);
+				call.enqueue(new Callback<ResponseBody>() {
+					@Override
+					public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+						try {
+							Log.e("Tag",response.body().string());
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					@Override
+					public void onFailure(Call<ResponseBody> call, Throwable t) {
+						Log.e("Tag",t.getMessage());
+					}
+				});
 				break;
 		}
 	}
